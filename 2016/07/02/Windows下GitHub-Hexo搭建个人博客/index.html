@@ -1,0 +1,574 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="废话一直想弄一个自己的博客，之前一直在观望中。。。以前玩过WordPress，当然不是建博客，是上大学的时候用WordPress赚了几包辣条的钱，我也不懂PHP，会一点简单的Html就找个模板改吧改吧而已，现在工作了，作为一个有情怀的人，肯定要有一个自己的博客才行啊，于是各种找教程，最终确定了用github + hexo来搭建，至于为什么选hexo，反正我在网上看了很久于是就开始了折腾，整个过程就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下GitHub + Hexo搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/07/02/Windows下GitHub-Hexo搭建个人博客/index.html">
+<meta property="og:site_name" content="Four">
+<meta property="og:description" content="废话一直想弄一个自己的博客，之前一直在观望中。。。以前玩过WordPress，当然不是建博客，是上大学的时候用WordPress赚了几包辣条的钱，我也不懂PHP，会一点简单的Html就找个模板改吧改吧而已，现在工作了，作为一个有情怀的人，肯定要有一个自己的博客才行啊，于是各种找教程，最终确定了用github + hexo来搭建，至于为什么选hexo，反正我在网上看了很久于是就开始了折腾，整个过程就">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-3c86e4567bd6fb66.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-ff4a6b0e60e7e57e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-b297c399f21cb07f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-194e929583185d7a.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-59e6a32b35b38ace.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-67df63114cbc9a70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-a871d25a8f778075.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-87ac8a03c2a8b51e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-aab1df142d77184e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-28611953f825c9a4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/594366-3baabbc882d27b5b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-02T03:42:46.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows下GitHub + Hexo搭建个人博客">
+<meta name="twitter:description" content="废话一直想弄一个自己的博客，之前一直在观望中。。。以前玩过WordPress，当然不是建博客，是上大学的时候用WordPress赚了几包辣条的钱，我也不懂PHP，会一点简单的Html就找个模板改吧改吧而已，现在工作了，作为一个有情怀的人，肯定要有一个自己的博客才行啊，于是各种找教程，最终确定了用github + hexo来搭建，至于为什么选hexo，反正我在网上看了很久于是就开始了折腾，整个过程就">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/594366-3c86e4567bd6fb66.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/02/Windows下GitHub-Hexo搭建个人博客/"/>
+
+  <title> Windows下GitHub + Hexo搭建个人博客 | Four </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Four</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Windows下GitHub + Hexo搭建个人博客
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-02T11:41:14+08:00" content="2016-07-02">
+              2016-07-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>一直想弄一个自己的博客，之前一直在观望中。。。<br><img src="http://upload-images.jianshu.io/upload_images/594366-3c86e4567bd6fb66.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>以前玩过WordPress，当然不是建博客，是上大学的时候用WordPress赚了几包辣条的钱，我也不懂PHP，会一点简单的Html就找个模板改吧改吧而已，现在工作了，作为一个有情怀的人，肯定要有一个自己的博客才行啊，于是各种找教程，最终确定了用github + hexo来搭建，至于为什么选hexo，反正我在网上看了很久<br><img src="http://upload-images.jianshu.io/upload_images/594366-ff4a6b0e60e7e57e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/594366-b297c399f21cb07f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>于是就开始了折腾，整个过程就一个晚上，配置起来确实很简单，整个过程参考了<a href="http://opiece.me/2015/04/09/hexo-guide/" target="_blank" rel="external">使用Hexo搭建个人博客(基于hexo3.0)</a>，在此非常感谢博主的分享。<br><img src="http://upload-images.jianshu.io/upload_images/594366-194e929583185d7a.gif?imageMogr2/auto-orient/strip" alt=""><br>整个搭建过程还算顺利，在此把我搭建的整个过程分享出来，希望可以帮助到更多的人。<br>此文适合新手小白玩家，本人也是第一次写文章，如有不对的地方，还请指出<br><img src="http://upload-images.jianshu.io/upload_images/594366-59e6a32b35b38ace.gif?imageMogr2/auto-orient/strip" alt=""><br>废话说多了，开始吧。。。。。。。</p>
+<h1 id="1、安装Git"><a href="#1、安装Git" class="headerlink" title="1、安装Git"></a>1、安装Git</h1><p>下载Windows下的<a href="https://git-scm.com/download/win" target="_blank" rel="external">Git客户端</a>并安装，安装很简单，基本一路Next下去。</p>
+<h1 id="2、安装Node-js"><a href="#2、安装Node-js" class="headerlink" title="2、安装Node.js"></a>2、安装Node.js</h1><p>下载<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>，安装Node.js也是一路Next下去。</p>
+<h1 id="3、Github配置"><a href="#3、Github配置" class="headerlink" title="3、Github配置"></a>3、Github配置</h1><p>Github账号注册就不说了，登陆过后点击new repository，Repository name填写自己的名称 + .github.io，<br>例如（test.github.io，test就是你的github账号的名称）（由于我也是才刚刚接触Github没多久，暂时就不说我的账号了，哈哈哈，太Low了），其他的可以不用填写，也不需要改什么。<br><img src="http://upload-images.jianshu.io/upload_images/594366-67df63114cbc9a70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建仓库截图"><br>然后直接点Create repository就可以了。</p>
+<h1 id="4、配置Github-SSH密钥"><a href="#4、配置Github-SSH密钥" class="headerlink" title="4、配置Github SSH密钥"></a>4、配置Github SSH密钥</h1><p>首先在桌面空白处鼠标右键选择Git Bash Here<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;your&apos;s emaill address&quot;</div></pre></td></tr></table></figure></p>
+<p>引号里面的内容输入你的邮箱地址，然后回车，会提示你文件保存的路径，这时候按回车键确认<br>然后会提示你输入密码，输入即可（输入密码是看不到的），然后会确认输入一次，就可以在刚刚的路径看到生成了两个文件，一个是id_rsa，另一个是id_rsa.pub，用notepadd++打开id_rsa.pub然后选中里面的全部内容，复制下来。</p>
+<p>登录github，点击头像可以看到setting选项，点击进入<br>然后可以看到左边有一个SSH and GPG keys选项<br>点击就可以看到以下界面，点击New SSH </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/594366-a871d25a8f778075.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这里的Title随便填写，主要是为了方便管理密钥<br>然后把刚刚拷贝的内容粘贴到Key里面去<br>然后点击Add SSH key<br>到此，Github上面的SSH配置就算完成了</p>
+<h1 id="5、创建本地仓库与Github同步"><a href="#5、创建本地仓库与Github同步" class="headerlink" title="5、创建本地仓库与Github同步"></a>5、创建本地仓库与Github同步</h1><p>首先是在本地的任意一个分区创建一个任意的文件夹，路径中最好不要用中文吧，反正你懂的<br>然后进入到刚刚创建的文件夹，右键，然后点击Git Bash Here<br><img src="http://upload-images.jianshu.io/upload_images/594366-87ac8a03c2a8b51e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开Git Bash"><br>依次输入以下命令（前面的$符号就不要复制了哈）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line">$ git config --global user.name &quot;Your&apos;s name&quot;</div><div class="line">$ git config --global user.email &quot;Your&apos;s email address&quot;</div></pre></td></tr></table></figure></p>
+<p>其中的Your’s name替换成你的名称，Your’s email address替换成你的邮件地址即可<br>然后再当前的文件夹下面新建一个README.md文件，然后右键用notepad++打开，随便写入一点内容，做一次简单的提交，输入以下命令<br>其中的yourname是github账号的名称，每个人是不一样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git add README.md</div><div class="line">$ git commit -m &quot;first commit&quot;</div><div class="line">$ git remote add origin git@github.com:yourname/yourname.github.io.git</div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure></p>
+<p>这时候进入到github应该就可以看到仓库下面有一个刚刚提交的README.md的文档了。</p>
+<h1 id="6、安装Hexo"><a href="#6、安装Hexo" class="headerlink" title="6、安装Hexo"></a>6、安装Hexo</h1><p>在桌面空白处右键打开Git Bash Here，可以先测试一下Node.js是否安装成功，直接输入node可以看到提示符变成了一个向右的箭头就表示成功了，然后按ctrl + c退出node模式，出现$符号才表示正常了<br>输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<p>敲完回车可能没有任何提示，请一定要耐心等待<br>安装成功后，可以输入以下命令测试以下Hexo是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo version</div></pre></td></tr></table></figure></p>
+<p>如果能看到hexo的版本号信息，就表示安装成功了<br>接下来，进入到我们刚刚创建的文件夹，右键打开Git Bash Here<br>然后依次输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div><div class="line">$ npm install</div><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
+<p>这时候在浏览器输入<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就可以看到hexo已经成功生成了博客，当然这只是我们本地可以看到的</p>
+<h1 id="7、配置Hexo到Github"><a href="#7、配置Hexo到Github" class="headerlink" title="7、配置Hexo到Github"></a>7、配置Hexo到Github</h1><p>找到我们刚刚创建的文件夹，在里面找到_config.yml文件，用notepad++打开，直接拖到最后，可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type:</div></pre></td></tr></table></figure></p>
+<p>改成以下，特别注意，在：的后面是有一个空格的，千万要小心，不然后出错的，其中yourname即在github上面的用户名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:  </div><div class="line">  type: git</div><div class="line">  repository: http://github.com/yourname/yourname.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>保存后，然后在当前文件夹打开Git Bash Here<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure></p>
+<p>如果出现以下异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR Deployer not found: git</div></pre></td></tr></table></figure></p>
+<p>尝试输入以下命令，然后重新执行刚刚的两条命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>这时候如果弹出一个对话框，输入在guthub上面的用户名和密码即可<br>这时候我们就可以在浏览器输入<a href="http://yourname.github.io（yourname替换成github上的名称）就可以看到博客已经搭建成功了。" target="_blank" rel="external">http://yourname.github.io（yourname替换成github上的名称）就可以看到博客已经搭建成功了。</a></p>
+<p>是不是很简单？<img src="http://upload-images.jianshu.io/upload_images/594366-aab1df142d77184e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>到此结束，车来了，我要准备上车了<br><img src="http://upload-images.jianshu.io/upload_images/594366-28611953f825c9a4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>如有疑问，请留言。。。<br><img src="http://upload-images.jianshu.io/upload_images/594366-3baabbc882d27b5b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/02/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Four" />
+          <p class="site-author-name" itemprop="name">Four</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#废话"><span class="nav-number">1.</span> <span class="nav-text">废话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、安装Git"><span class="nav-number">2.</span> <span class="nav-text">1、安装Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、安装Node-js"><span class="nav-number">3.</span> <span class="nav-text">2、安装Node.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、Github配置"><span class="nav-number">4.</span> <span class="nav-text">3、Github配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、配置Github-SSH密钥"><span class="nav-number">5.</span> <span class="nav-text">4、配置Github SSH密钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、创建本地仓库与Github同步"><span class="nav-number">6.</span> <span class="nav-text">5、创建本地仓库与Github同步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、安装Hexo"><span class="nav-number">7.</span> <span class="nav-text">6、安装Hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、配置Hexo到Github"><span class="nav-number">8.</span> <span class="nav-text">7、配置Hexo到Github</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Four</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
