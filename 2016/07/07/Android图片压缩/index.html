@@ -1,0 +1,619 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="对于Android来说，图片的压缩主要有两种：
+体积压缩这种方式主要是对Bitmap进行压缩，通过压缩Bitmap的大小，这种方式的特点是图片在磁盘上的体积确实被压缩了，但是读取到内存中的时候并没有变化。对于BitmapFactory.Options来说，有两个值很重要：
+inJustDecodeBounds当inJustDecodeBounds = true的时候，decodeFile出来的bi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android图片压缩">
+<meta property="og:url" content="http://yoursite.com/2016/07/07/Android图片压缩/index.html">
+<meta property="og:site_name" content="Four">
+<meta property="og:description" content="对于Android来说，图片的压缩主要有两种：
+体积压缩这种方式主要是对Bitmap进行压缩，通过压缩Bitmap的大小，这种方式的特点是图片在磁盘上的体积确实被压缩了，但是读取到内存中的时候并没有变化。对于BitmapFactory.Options来说，有两个值很重要：
+inJustDecodeBounds当inJustDecodeBounds = true的时候，decodeFile出来的bi">
+<meta property="og:updated_time" content="2016-07-07T03:07:00.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android图片压缩">
+<meta name="twitter:description" content="对于Android来说，图片的压缩主要有两种：
+体积压缩这种方式主要是对Bitmap进行压缩，通过压缩Bitmap的大小，这种方式的特点是图片在磁盘上的体积确实被压缩了，但是读取到内存中的时候并没有变化。对于BitmapFactory.Options来说，有两个值很重要：
+inJustDecodeBounds当inJustDecodeBounds = true的时候，decodeFile出来的bi">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/07/Android图片压缩/"/>
+
+  <title> Android图片压缩 | Four </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1259802851&web_id=1259802851" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Four</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android图片压缩
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-07T11:06:23+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于Android来说，图片的压缩主要有两种：</p>
+<h1 id="体积压缩"><a href="#体积压缩" class="headerlink" title="体积压缩"></a>体积压缩</h1><p>这种方式主要是对Bitmap进行压缩，通过压缩Bitmap的大小，这种方式的特点是图片在磁盘上的体积确实被压缩了，但是读取到内存中的时候并没有变化。<br>对于BitmapFactory.Options来说，有两个值很重要：</p>
+<h2 id="inJustDecodeBounds"><a href="#inJustDecodeBounds" class="headerlink" title="inJustDecodeBounds"></a>inJustDecodeBounds</h2><p>当inJustDecodeBounds = true的时候，decodeFile出来的bitmap只读取了原图的宽高，并没有读取原图的内容，这样做主要是为了内存的优化，方便我们计算bitmap对应的压缩比。</p>
+<h2 id="inSampleSize"><a href="#inSampleSize" class="headerlink" title="inSampleSize"></a>inSampleSize</h2><p>inSampleSize是bitmap的压缩比，只能是正整数，例如当inSampleSize = 2的时候，原图的宽高都缩小为原来的一半，相当于面试缩小到原来的四分之一；<br>当inSampleSize &lt; 1的时候都是作为1来进行处理的；<br><strong>注意：inSampleSize只对2的N次方的值有效，当一个值不是2的N次方的时候，都是用上一个2的N次方运算出来的值</strong></p>
+<p>具体代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Bitmap <span class="title">compressSize</span><span class="params">(String imgPath)</span> </span>&#123;</div><div class="line">        BitmapFactory.Options newOpts = <span class="keyword">new</span> BitmapFactory.Options();</div><div class="line">        <span class="comment">//先将这个值设为true，只读取Bitmap的宽高</span></div><div class="line">        newOpts.inJustDecodeBounds = <span class="keyword">true</span>;</div><div class="line">        newOpts.inPreferredConfig = Bitmap.Config.RGB_565;</div><div class="line">        Bitmap bitmap = BitmapFactory.decodeFile(imgPath, newOpts);</div><div class="line">        <span class="comment">//原图的宽度</span></div><div class="line">        <span class="keyword">int</span> realW = newOpts.outWidth;</div><div class="line">        <span class="comment">//原图的高度</span></div><div class="line">        <span class="keyword">int</span> realH = newOpts.outHeight;</div><div class="line">        MLog.e(<span class="string">"压缩前Width："</span> + realW);</div><div class="line">        MLog.e(<span class="string">"压缩前Height："</span> + realH);</div><div class="line">        <span class="comment">//读取到原图的宽高后，这个值设置为false，准备进行真正的压缩</span></div><div class="line">        newOpts.inJustDecodeBounds = <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//根据图片宽高来计算我们所需要的压缩比</span></div><div class="line">        <span class="keyword">int</span> sampleSize = getSampleSize(realW, realH);</div><div class="line">        MLog.e(<span class="string">"SampleSize="</span> + sampleSize);</div><div class="line">        <span class="comment">//设置图片的压缩比</span></div><div class="line">        newOpts.inSampleSize = sampleSize;</div><div class="line">        <span class="comment">//重新编码图片</span></div><div class="line">        bitmap = BitmapFactory.decodeFile(imgPath, newOpts);</div><div class="line">        MLog.e(<span class="string">"压缩后Width："</span> + bitmap.getWidth());</div><div class="line">        MLog.e(<span class="string">"压缩后Height："</span> + bitmap.getHeight());</div><div class="line">        <span class="keyword">return</span> bitmap;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* realW 图片的真实宽度</div><div class="line">* realH 图片的真实高度</div><div class="line">**/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSampleSize</span><span class="params">(<span class="keyword">int</span> realW, <span class="keyword">int</span> realH)</span> </span>&#123;</div><div class="line">        <span class="keyword">float</span> sampleSize = <span class="number">1</span>;</div><div class="line">        <span class="comment">//MAX_WIDTH 我们自己规定的所要压缩的图片的最大的宽度</span></div><div class="line">        <span class="keyword">if</span> (realW &gt; MAX_WIDTH) &#123;</div><div class="line">            sampleSize = realW / MAX_WIDTH;</div><div class="line">            MLog.e(<span class="string">"Width"</span> + sampleSize);</div><div class="line">            <span class="keyword">return</span> (<span class="keyword">int</span>) Math.ceil(sampleSize);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//MAX_WIDTH 我们自己规定的所要压缩的图片的最大的高度</span></div><div class="line">        <span class="keyword">if</span> (realH &gt; MAX_HEIGHT) &#123;</div><div class="line">            sampleSize = realH / MAX_HEIGHT;</div><div class="line">            MLog.e(<span class="string">"Height"</span> + sampleSize);</div><div class="line">            <span class="keyword">return</span> (<span class="keyword">int</span>) Math.ceil(sampleSize);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (sampleSize &lt;= <span class="number">0</span>) &#123;</div><div class="line">            sampleSize = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) Math.ceil(sampleSize);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这时候我们就对把图片的体积压缩了。</p>
+<h1 id="质量压缩"><a href="#质量压缩" class="headerlink" title="质量压缩"></a>质量压缩</h1><p>这种压缩方式主要是对图片的质量进行进一步的压缩，以减小图片在磁盘上占用空间<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">compressQuality</span><span class="params">(Bitmap image, String outPath)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">    <span class="comment">//默认的100，从80开始压缩</span></div><div class="line">    <span class="keyword">int</span> options = <span class="number">80</span>;</div><div class="line">    image.compress(Bitmap.CompressFormat.JPEG, options, os);</div><div class="line">    <span class="comment">//用循环来实现，如果没有压缩到我们想要的大小，就改变options的值，继续压缩，直到压缩到理想的大小为止</span></div><div class="line">    <span class="comment">//MAX_SIZE_KB为理想的最大的占用空间KB</span></div><div class="line">    <span class="keyword">while</span> (os.toByteArray().length / <span class="number">1024</span> &gt; MAX_SIZE_KB) &#123;</div><div class="line">        os.reset();</div><div class="line">        options -= <span class="number">10</span>;</div><div class="line">        image.compress(Bitmap.CompressFormat.JPEG, options, os);</div><div class="line">    &#125;</div><div class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(outPath);</div><div class="line">    fos.write(os.toByteArray());</div><div class="line">    image.recycle();</div><div class="line">    fos.flush();</div><div class="line">    fos.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最后通过下面的方式调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">compress</span><span class="params">(String imgPath, String outPath)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">	<span class="comment">//将对体积压缩过的图片再进行图像质量的压缩</span></div><div class="line">    compressQuality(compressSize(imgPath), outPath);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/07/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Four" />
+          <p class="site-author-name" itemprop="name">Four</p>
+          <p class="site-description motion-element" itemprop="description">Small is powerful, Small is beautiful !</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#体积压缩"><span class="nav-number">1.</span> <span class="nav-text">体积压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inJustDecodeBounds"><span class="nav-number">1.1.</span> <span class="nav-text">inJustDecodeBounds</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inSampleSize"><span class="nav-number">1.2.</span> <span class="nav-text">inSampleSize</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质量压缩"><span class="nav-number">2.</span> <span class="nav-text">质量压缩</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Four</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
